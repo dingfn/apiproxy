@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>apiproxy.ai</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-color: #000;
+      color: #33ff33;
+      font-family: "Courier New", Courier, monospace;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    h1 {
+      font-size: 3rem;
+    }
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      background-color: #33ff33;
+      margin-left: 5px;
+      animation: blink 1s step-start infinite;
+      height: 1.2em;
+      vertical-align: bottom;
+    }
+    @keyframes blink {
+      50% { background-color: transparent; }
+    }
+    .contact {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      line-height: 2;
+    }
+    .contact a {
+      color: #33ff33;
+      text-decoration: none;
+    }
+    .contact a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hello World <span class="cursor"></span></h1>
+  <div class="contact">
+    Email: <a href="mailto:hi@apiproxy.ai">hi@apiproxy.ai</a><br>
+    iMessage: <a href="sms:hi@apiproxy.ai">hi@apiproxy.ai</a>
+  </div>
+</body>
+</html>
