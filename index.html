@@ -45,13 +45,66 @@
     .contact a:hover {
       text-decoration: underline;
     }
+    
+    .wechat-container {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .wechat-popup {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #111;
+      border: 2px solid #33ff33;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(51, 255, 51, 0.3);
+    }
+    
+    .wechat-popup img {
+      width: 200px;
+      height: 200px;
+      display: block;
+      border-radius: 4px;
+    }
+    
+    .wechat-popup::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 8px solid transparent;
+      border-top-color: #33ff33;
+    }
+    
+    .wechat-container:hover .wechat-popup {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .wechat-link {
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <h1>Hello World <span class="cursor"></span></h1>
   <div class="contact">
     Email: <a href="mailto:hi@apiproxy.ai">hi@apiproxy.ai</a><br>
-    iMessage: <a href="sms:hi@apiproxy.ai">hi@apiproxy.ai</a>
+    <div class="wechat-container">
+      WeChat: <span class="wechat-link">apiproxy</span>
+      <div class="wechat-popup">
+        <img src="https://www.apiproxy.ai/apiproxyWeChat.jpg" alt="WeChat QR Code" />
+      </div>
+    </div>
   </div>
 </body>
 </html>
