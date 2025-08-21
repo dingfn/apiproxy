@@ -5,45 +5,103 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>apiproxy.ai</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
       height: 100vh;
-      background-color: #000;
-      color: #33ff33;
-      font-family: "Courier New", Courier, monospace;
+      background: #faf8f5;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', system-ui, sans-serif;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
+      color: #1f1f1f;
+      line-height: 1.5;
+      padding: 2rem;
     }
+    
+    .container {
+      max-width: 600px;
+      width: 100%;
+    }
+    
     h1 {
-      font-size: 3rem;
+      font-size: 2.25rem;
+      font-weight: 500;
+      margin-bottom: 3rem;
+      color: #cc785c;
+      min-height: 3rem;
+      letter-spacing: -0.025em;
     }
+    
     .cursor {
       display: inline-block;
-      width: 10px;
-      background-color: #33ff33;
-      margin-left: 5px;
-      animation: blink 1s step-start infinite;
-      height: 1.2em;
+      width: 2px;
+      background: #cc785c;
+      margin-left: 4px;
+      animation: blink 1.2s ease-in-out infinite;
+      height: 1.1em;
       vertical-align: bottom;
     }
+    
     @keyframes blink {
-      50% { background-color: transparent; }
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
     }
+    
     .contact {
-      margin-top: 2rem;
-      font-size: 1.2rem;
-      line-height: 2;
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      font-size: 1rem;
+      justify-content: center;
+      align-items: center;
     }
-    .contact a {
-      color: #33ff33;
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .contact-item:hover {
+      transform: translateY(-2px);
+    }
+    
+    .label {
+      font-weight: 500;
+      color: #6b6b6b;
+      min-width: 80px;
+      text-align: left;
+    }
+    
+    .contact-item a,
+    .wechat-link {
+      color: #cc785c;
       text-decoration: none;
+      font-weight: 400;
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      background: rgba(204, 120, 92, 0.05);
+      border: 1px solid rgba(204, 120, 92, 0.1);
     }
-    .contact a:hover {
-      text-decoration: underline;
+    
+    .contact-item a:hover,
+    .wechat-link:hover {
+      color: #b8654a;
+      background: rgba(204, 120, 92, 0.1);
+      border-color: rgba(204, 120, 92, 0.2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(204, 120, 92, 0.15);
     }
     
     .wechat-container {
@@ -51,38 +109,58 @@
       display: inline-block;
     }
     
+    .wechat-link {
+      cursor: pointer;
+      display: inline-block;
+    }
+    
     .wechat-popup {
       position: absolute;
-      bottom: 100%;
+      top: calc(100% + 20px);
       left: 50%;
       transform: translateX(-50%);
-      background-color: #111;
-      border: 2px solid #33ff33;
+      background: #ffffff;
+      border: 1px solid #f0ede8;
       border-radius: 8px;
-      padding: 10px;
-      margin-bottom: 10px;
+      padding: 1rem;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
+      transition: all 0.2s ease;
       z-index: 1000;
-      box-shadow: 0 4px 15px rgba(51, 255, 51, 0.3);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     }
     
     .wechat-popup img {
-      width: 200px;
-      height: 200px;
+      width: 180px;
+      height: 180px;
       display: block;
       border-radius: 4px;
+    }
+    
+    .wechat-popup .fallback {
+      width: 180px;
+      height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #faf8f5;
+      border: 1px solid #f0ede8;
+      border-radius: 4px;
+      font-size: 14px;
+      text-align: center;
+      color: #6b6b6b;
+      line-height: 1.4;
     }
     
     .wechat-popup::after {
       content: "";
       position: absolute;
-      top: 100%;
+      bottom: 100%;
       left: 50%;
       transform: translateX(-50%);
-      border: 8px solid transparent;
-      border-top-color: #33ff33;
+      border: 6px solid transparent;
+      border-bottom-color: #ffffff;
     }
     
     .wechat-container:hover .wechat-popup {
@@ -90,19 +168,105 @@
       visibility: visible;
     }
     
-    .wechat-link {
-      cursor: pointer;
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+      
+      h1 {
+        font-size: 1.75rem;
+        margin-bottom: 2rem;
+      }
+      
+      .contact {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      
+      .contact-item {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .wechat-container {
+        display: inline-block;
+      }
+      
+      .wechat-popup {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .wechat-popup::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .wechat-popup img,
+      .wechat-popup .fallback {
+        width: 150px;
+        height: 150px;
+      }
     }
   </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const text = "Claude账号免费领，代充Pro/Max质保30天，封号全额退款，国内直接用Claude Code 0.5RMB/USD";
+      const typewriterElement = document.getElementById('typewriter');
+      let index = 0;
+      let isDeleting = false;
+      
+      function typeEffect() {
+        if (!typewriterElement) return;
+        
+        if (!isDeleting) {
+          typewriterElement.textContent = text.substring(0, index + 1);
+          index++;
+          
+          if (index === text.length) {
+            setTimeout(() => {
+              isDeleting = true;
+              typeEffect();
+            }, 3000);
+            return;
+          }
+          
+          setTimeout(typeEffect, 100);
+        } else {
+          typewriterElement.textContent = '';
+          index = 0;
+          
+          setTimeout(() => {
+            isDeleting = false;
+            typeEffect();
+          }, 1000);
+        }
+      }
+      
+      setTimeout(typeEffect, 500);
+    });
+  </script>
 </head>
 <body>
-  <h1>Hello World <span class="cursor"></span></h1>
-  <div class="contact">
-    Email: <a href="mailto:hi@apiproxy.ai">hi@apiproxy.ai</a><br>
-    <div class="wechat-container">
-      WeChat: <span class="wechat-link">apiproxy</span>
-      <div class="wechat-popup">
-        <img src="https://www.apiproxy.ai/apiproxyWeChat.jpg" alt="WeChat QR Code" />
+  <div class="container">
+    <h1><span id="typewriter"></span><span class="cursor"></span></h1>
+    <div class="contact">
+      <div class="contact-item">
+        <a href="mailto:hi@apiproxy.ai">hi@apiproxy.ai</a>
+      </div>
+      <div class="contact-item">
+        <div class="wechat-container">
+          <span class="wechat-link">apiproxy</span>
+          <div class="wechat-popup">
+            <img src="https://www.apiproxy.ai/apiproxyWeChat.jpg" alt="WeChat QR Code" 
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+            <div class="fallback" style="display: none;">
+              WeChat QR Code<br>
+              ID: apiproxy<br>
+              <small>Image loading failed</small>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
